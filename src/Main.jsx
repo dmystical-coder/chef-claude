@@ -14,6 +14,10 @@ const Main = () => {
         setIngredients((prevIngredients) => [...prevIngredients, newIngredient]);
     }
 
+    function deleteIngredient(ingredient) {
+        setIngredients((prevIngredients) => prevIngredients.filter((i) => i !== ingredient));
+    }
+
     function toggleRecipe() {
         setLoading(true);
         getRecipeFromMistral(ingredients)
@@ -27,7 +31,7 @@ const Main = () => {
     return (
         <main>
             <AddIngredient onAdd={addIngredient} length={ingredients.length} />
-            {ingredients.length > 0 && <IngredientsList ingredients={ingredients} />}
+            {ingredients.length > 0 && <IngredientsList ingredients={ingredients} removeIngredient={deleteIngredient} />}
             {ingredients.length > 3 && <Cta loading={loading} toggleRecipe={toggleRecipe} />}
             {recipe && <ClaudeRecipe recipe={recipe} />}
         </main>
