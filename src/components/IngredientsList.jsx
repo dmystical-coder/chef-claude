@@ -4,7 +4,7 @@ const IngredientsList = ({ ingredients }) => {
 
     const ingredientsList = ingredients.map((ingredient, index) => (
         <li key={index} className="ingredients-display__list-item">
-            {ingredient}
+            {ingredient} <button className="delete">&times;</button>
         </li>
     ));
     return (
