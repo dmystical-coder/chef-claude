@@ -7,25 +7,28 @@ import getRecipeFromMistral from "../netlify/functions/ai";
 
 const Main = () => {
     const [ingredients, setIngredients] = useState([]);
-    const [recipe, setRecipe] = useState('');
+    const [loading, setLoading] = useState(false);
+    const [recipe, setRecipe] = useState(null);
 
     function addIngredient(newIngredient) {
         setIngredients((prevIngredients) => [...prevIngredients, newIngredient]);
     }
 
     function toggleRecipe() {
+        setLoading(true);
         getRecipeFromMistral(ingredients)
             .then((recipe) => {
                 console.log(recipe)
                 setRecipe(recipe)
+                setLoading(false)
             })
     }
 
     return (
         <main>
-            <AddIngredient onAdd={addIngredient} />
+            <AddIngredient onAdd={addIngredient} length={ingredients.length} />
             {ingredients.length > 0 && <IngredientsList ingredients={ingredients} />}
-            {ingredients.length > 3 && <Cta toggleRecipe={toggleRecipe} />}
+            {ingredients.length > 3 && <Cta loading={loading} toggleRecipe={toggleRecipe} />}
             {recipe && <ClaudeRecipe recipe={recipe} />}
         </main>
     );
