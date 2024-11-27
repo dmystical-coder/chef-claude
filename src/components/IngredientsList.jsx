@@ -1,10 +1,10 @@
 import PropTypes from 'prop-types'
 
-const IngredientsList = ({ ingredients, removeIngredient }) => {
+const IngredientsList = ({ ingredients, removeIngredient, recipe }) => {
 
     const ingredientsList = ingredients.map((ingredient, index) => (
         <li key={index} className="ingredients-display__list-item">
-            {ingredient} <button onClick={() => removeIngredient(ingredient)} className="delete">&times;</button>
+            {ingredient} {!recipe && <button onClick={() => removeIngredient(ingredient)} className="delete">&times;</button>}
         </li>
     ));
     return (
@@ -18,7 +18,8 @@ const IngredientsList = ({ ingredients, removeIngredient }) => {
 
 IngredientsList.propTypes = {
     ingredients: PropTypes.array.isRequired,
-    removeIngredient: PropTypes.func.isRequired
+    removeIngredient: PropTypes.func.isRequired,
+    recipe: PropTypes.object.isRequired
 }
 
 export default IngredientsList;

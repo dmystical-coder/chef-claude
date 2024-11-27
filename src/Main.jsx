@@ -31,7 +31,7 @@ const Main = () => {
     return (
         <main>
             <AddIngredient onAdd={addIngredient} length={ingredients.length} />
-            {ingredients.length > 0 && <IngredientsList ingredients={ingredients} removeIngredient={deleteIngredient} />}
+            {ingredients.length > 0 && <IngredientsList ingredients={ingredients} removeIngredient={deleteIngredient} recipe={recipe} />}
             {ingredients.length > 3 && <Cta loading={loading} toggleRecipe={toggleRecipe} />}
             {recipe && <ClaudeRecipe recipe={recipe} />}
         </main>
